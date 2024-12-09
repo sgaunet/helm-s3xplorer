@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "s3xplorer.fullname" . }}
+  labels:
+    {{- include "s3xplorer.labels" . | nindent 4 }}
+    {{- with .Values.additionalLabels -}}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  annotations:
+    {{- with .Values.additionalAnnotations -}}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "s3xplorer.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- if eq .Values.image.tag "latest" }}
+        rollme: {{ randAlphaNum 5 | quote }}
+        {{- end }}
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "s3xplorer.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          volumeMounts:
+          - name: config-volume
+            mountPath: /cfg.yaml
+            subPath: cfg.yaml
+          {{- range .Values.additionalEnvFrom }}
+          - {{- . | toYaml | nindent 12 }}
+          {{- end }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ include "s3xplorer.fullname" . }}

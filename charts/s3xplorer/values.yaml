@@ -1,0 +1,63 @@
+# Declare variables to be passed into your templates.
+# -- number of replicas
+replicaCount: 1
+# -- additional deployment labels (will be merged with the default labels)
+additionalLabels: {}
+# additionalLabels:
+#   exposed: "true"
+
+# -- additional annotations
+additionalAnnotations: {}
+
+image:
+  # -- image repository
+  repository: sgaunet/s3xplorer
+  pullPolicy: IfNotPresent
+  # -- Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+# -- image pull secrets
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+podAnnotations: {}
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+service:
+  type: ClusterIP
+  port: 8081
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+configuration:
+  # -- comment for the documentation
+  s3endpoint: ""
+  s3region: "eu-west-3"
+  accesskey: ""
+  apikey: ""
+  ssoawsprofile: "my-profile"
+  bucket: "my-bucket"
+  loglevel: "info"
+
+# -- additional configmap or secret. 
+additionalEnvFrom: []
+# - configMapRef:
+#     name: common-configmap1
