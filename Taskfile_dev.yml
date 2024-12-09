@@ -1,0 +1,15 @@
+# https://taskfile.dev
+version: '3'
+
+tasks:
+  install-pre-commit:
+    desc: "Install pre-commit hooks"
+    cmds:
+      - pre-commit install
+
+  pre-commit:
+    desc: "Run pre-commit hooks"
+    precondition:
+      - which helm-docs
+    cmds:
+      - pre-commit run --all-files

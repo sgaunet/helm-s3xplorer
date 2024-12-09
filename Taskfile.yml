@@ -1,0 +1,16 @@
+# https://taskfile.dev
+version: '3'
+
+includes:
+  dev: ./Taskfile_dev.yml
+
+tasks:
+  default:
+    desc: "List all tasks"
+    cmds:
+      - task -a
+
+  helm-docs:
+    desc: "Build helm documentation"
+    cmds:
+      - helm-docs
