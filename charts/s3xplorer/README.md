@@ -1,6 +1,6 @@
 # s3xplorer
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.2.0](https://img.shields.io/badge/AppVersion-0.2.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -12,13 +12,14 @@ A Helm chart for Kubernetes
 | additionalEnvFrom | list | `[]` | additional configmap or secret.  |
 | additionalLabels | object | `{}` | additional deployment labels (will be merged with the default labels) |
 | affinity | object | `{}` |  |
-| configuration.accesskey | string | `""` |  |
-| configuration.apikey | string | `""` |  |
-| configuration.bucket | string | `"my-bucket"` |  |
+| configuration.accesskey | string | `""` | access key for the aws credentials |
+| configuration.apikey | string | `""` | api key for the aws credentials |
+| configuration.bucket | string | `"my-bucket"` | bucket name |
 | configuration.loglevel | string | `"info"` |  |
-| configuration.s3endpoint | string | `""` | comment for the documentation |
-| configuration.s3region | string | `"eu-west-3"` |  |
-| configuration.ssoawsprofile | string | `"my-profile"` |  |
+| configuration.prefix | string | `""` | set the prefix to restrict the access to a specific folder |
+| configuration.s3endpoint | string | `""` | s3 endpoint |
+| configuration.s3region | string | `"eu-west-3"` | region of the s3 bucket |
+| configuration.ssoawsprofile | string | `""` | in case of helm deployment, ssoawsprofile should be left empty |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"sgaunet/s3xplorer"` | image repository |

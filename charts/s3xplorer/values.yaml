@@ -48,13 +48,20 @@ tolerations: []
 affinity: {}
 
 configuration:
-  # -- comment for the documentation
+  # -- s3 endpoint
   s3endpoint: ""
+  # -- region of the s3 bucket
   s3region: "eu-west-3"
+  # -- access key for the aws credentials
   accesskey: ""
+  # -- api key for the aws credentials
   apikey: ""
-  ssoawsprofile: "my-profile"
+  # -- in case of helm deployment, ssoawsprofile should be left empty
+  ssoawsprofile: ""
+  # -- bucket name
   bucket: "my-bucket"
+  # -- set the prefix to restrict the access to a specific folder
+  prefix: ""
   loglevel: "info"
 
 # -- additional configmap or secret. 
