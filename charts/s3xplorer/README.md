@@ -15,7 +15,7 @@ A Helm chart for Kubernetes
 | configuration.accesskey | string | `""` | access key for the aws credentials |
 | configuration.apikey | string | `""` | api key for the aws credentials |
 | configuration.bucket | string | `"my-bucket"` | bucket name |
-| configuration.loglevel | string | `"info"` |  |
+| configuration.loglevel | string | `"info"` | debug | info | warn | error |
 | configuration.prefix | string | `""` | set the prefix to restrict the access to a specific folder |
 | configuration.s3endpoint | string | `""` | s3 endpoint |
 | configuration.s3region | string | `"eu-west-3"` | region of the s3 bucket |

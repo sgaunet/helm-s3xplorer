@@ -62,6 +62,7 @@ configuration:
   bucket: "my-bucket"
   # -- set the prefix to restrict the access to a specific folder
   prefix: ""
+  # -- debug | info | warn | error
   loglevel: "info"
 
 # -- additional configmap or secret. 
