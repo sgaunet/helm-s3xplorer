@@ -1,6 +1,6 @@
 # s3xplorer
 
-![Version: 0.4.1](https://img.shields.io/badge/Version-0.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.4.1](https://img.shields.io/badge/AppVersion-0.4.1-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.5.1](https://img.shields.io/badge/AppVersion-0.5.1-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -12,17 +12,33 @@ A Helm chart for Kubernetes
 | additionalEnvFrom | list | `[]` | additional configmap or secret.  |
 | additionalLabels | object | `{}` | additional deployment labels (will be merged with the default labels) |
 | affinity | object | `{}` |  |
-| configuration.accesskey | string | `""` | access key for the aws credentials |
-| configuration.apikey | string | `""` | api key for the aws credentials |
-| configuration.bucket | string | `"my-bucket"` | bucket name |
-| configuration.loglevel | string | `"info"` | debug or info or warn or error |
-| configuration.prefix | string | `""` | set the prefix to restrict the access to a specific folder |
-| configuration.s3endpoint | string | `""` | s3 endpoint |
-| configuration.s3region | string | `"eu-west-3"` | region of the s3 bucket |
-| configuration.ssoawsprofile | string | `""` | in case of helm deployment, ssoawsprofile should be left empty |
+| configuration.bucket_sync | object | `{"delete_threshold":"168h","enable":true,"max_retries":3,"sync_threshold":"24h"}` | Bucket synchronization configuration |
+| configuration.bucket_sync.delete_threshold | string | `"168h"` | time threshold for deleting inaccessible buckets |
+| configuration.bucket_sync.enable | bool | `true` | enable bucket synchronization |
+| configuration.bucket_sync.max_retries | int | `3` | maximum retries for bucket accessibility checks |
+| configuration.bucket_sync.sync_threshold | string | `"24h"` | time threshold for marking buckets as inaccessible |
+| configuration.database | object | `{"url":"postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"}` | Database configuration |
+| configuration.database.url | string | `"postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"` | PostgreSQL connection URL |
+| configuration.log_level | string | `"info"` | log level (debug, info, warn, error) |
+| configuration.s3 | object | `{"access_key":"","api_key":"","bucket":"my-bucket","enable_glacier_restore":false,"endpoint":"","prefix":"","region":"eu-west-3","restore_days":1,"skip_bucket_validation":false,"sso_aws_profile":""}` | S3 configuration |
+| configuration.s3.access_key | string | `""` | access key for the aws credentials |
+| configuration.s3.api_key | string | `""` | api key for the aws credentials |
+| configuration.s3.bucket | string | `"my-bucket"` | bucket name |
+| configuration.s3.enable_glacier_restore | bool | `false` | enable glacier restore functionality |
+| configuration.s3.endpoint | string | `""` | s3 endpoint |
+| configuration.s3.prefix | string | `""` | set the prefix to restrict the access to a specific folder |
+| configuration.s3.region | string | `"eu-west-3"` | region of the s3 bucket |
+| configuration.s3.restore_days | int | `1` | number of days for glacier restore |
+| configuration.s3.skip_bucket_validation | bool | `false` | skip bucket validation (HeadBucket operation) |
+| configuration.s3.sso_aws_profile | string | `""` | in case of helm deployment, sso_aws_profile should be left empty |
+| configuration.scan | object | `{"cron_schedule":"0 0 2 * * *","enable_background_scan":true,"enable_deletion_sync":true,"enable_initial_scan":true}` | Scan configuration |
+| configuration.scan.cron_schedule | string | `"0 0 2 * * *"` | cron schedule for scanning (default: "0 0 2 * * *" - daily at 2 AM) |
+| configuration.scan.enable_background_scan | bool | `true` | enable background scanning |
+| configuration.scan.enable_deletion_sync | bool | `true` | enable deletion sync (remove objects from DB that are no longer in S3) |
+| configuration.scan.enable_initial_scan | bool | `true` | enable initial scan on startup |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
-| image.repository | string | `"sgaunet/s3xplorer"` | image repository |
+| image.repository | string | `"ghcr.io/sgaunet/s3xplorer"` | image repository |
 | image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | image pull secrets |
 | nameOverride | string | `""` |  |

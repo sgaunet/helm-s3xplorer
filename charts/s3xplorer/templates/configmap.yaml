@@ -4,6 +4,29 @@ metadata:
   name: {{ include "s3xplorer.fullname" . }}
 data:
   cfg.yaml: |
-  {{- range $k,$v := .Values.configuration }}
-    {{ $k }}: {{ $v | quote }}
-  {{- end }}
+    {{- with .Values.configuration }}
+    s3:
+      endpoint: {{ .s3.endpoint | quote }}
+      region: {{ .s3.region | quote }}
+      access_key: {{ .s3.access_key | quote }}
+      api_key: {{ .s3.api_key | quote }}
+      sso_aws_profile: {{ .s3.sso_aws_profile | quote }}
+      bucket: {{ .s3.bucket | quote }}
+      prefix: {{ .s3.prefix | quote }}
+      restore_days: {{ .s3.restore_days }}
+      enable_glacier_restore: {{ .s3.enable_glacier_restore }}
+      skip_bucket_validation: {{ .s3.skip_bucket_validation }}
+    database:
+      url: {{ .database.url | quote }}
+    scan:
+      enable_background_scan: {{ .scan.enable_background_scan }}
+      cron_schedule: {{ .scan.cron_schedule | quote }}
+      enable_initial_scan: {{ .scan.enable_initial_scan }}
+      enable_deletion_sync: {{ .scan.enable_deletion_sync }}
+    bucket_sync:
+      enable: {{ .bucket_sync.enable }}
+      sync_threshold: {{ .bucket_sync.sync_threshold | quote }}
+      delete_threshold: {{ .bucket_sync.delete_threshold | quote }}
+      max_retries: {{ .bucket_sync.max_retries }}
+    log_level: {{ .log_level | quote }}
+    {{- end }}

@@ -11,7 +11,7 @@ additionalAnnotations: {}
 
 image:
   # -- image repository
-  repository: sgaunet/s3xplorer
+  repository: ghcr.io/sgaunet/s3xplorer
   pullPolicy: IfNotPresent
   # -- Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -48,22 +48,58 @@ tolerations: []
 affinity: {}
 
 configuration:
-  # -- s3 endpoint
-  s3endpoint: ""
-  # -- region of the s3 bucket
-  s3region: "eu-west-3"
-  # -- access key for the aws credentials
-  accesskey: ""
-  # -- api key for the aws credentials
-  apikey: ""
-  # -- in case of helm deployment, ssoawsprofile should be left empty
-  ssoawsprofile: ""
-  # -- bucket name
-  bucket: "my-bucket"
-  # -- set the prefix to restrict the access to a specific folder
-  prefix: ""
-  # -- debug or info or warn or error
-  loglevel: "info"
+  # -- S3 configuration
+  s3:
+    # -- s3 endpoint
+    endpoint: ""
+    # -- region of the s3 bucket
+    region: "eu-west-3"
+    # -- access key for the aws credentials
+    access_key: ""
+    # -- api key for the aws credentials
+    api_key: ""
+    # -- in case of helm deployment, sso_aws_profile should be left empty
+    sso_aws_profile: ""
+    # -- bucket name
+    bucket: "my-bucket"
+    # -- set the prefix to restrict the access to a specific folder
+    prefix: ""
+    # -- number of days for glacier restore
+    restore_days: 1
+    # -- enable glacier restore functionality
+    enable_glacier_restore: false
+    # -- skip bucket validation (HeadBucket operation)
+    skip_bucket_validation: false
+  
+  # -- Database configuration
+  database:
+    # -- PostgreSQL connection URL
+    url: "postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"
+  
+  # -- Scan configuration
+  scan:
+    # -- enable background scanning
+    enable_background_scan: true
+    # -- cron schedule for scanning (default: "0 0 2 * * *" - daily at 2 AM)
+    cron_schedule: "0 0 2 * * *"
+    # -- enable initial scan on startup
+    enable_initial_scan: true
+    # -- enable deletion sync (remove objects from DB that are no longer in S3)
+    enable_deletion_sync: true
+  
+  # -- Bucket synchronization configuration
+  bucket_sync:
+    # -- enable bucket synchronization
+    enable: true
+    # -- time threshold for marking buckets as inaccessible
+    sync_threshold: "24h"
+    # -- time threshold for deleting inaccessible buckets
+    delete_threshold: "168h"
+    # -- maximum retries for bucket accessibility checks
+    max_retries: 3
+  
+  # -- log level (debug, info, warn, error)
+  log_level: "info"
 
 # -- additional configmap or secret. 
 additionalEnvFrom: []
