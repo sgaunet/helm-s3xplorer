@@ -3,6 +3,17 @@ entries:
   s3xplorer:
   - apiVersion: v2
     appVersion: 0.6.0
+    created: "2025-10-04T07:20:43.349626066Z"
+    description: A Helm chart for Kubernetes
+    digest: a15e196b7b54919f241972f0430d5f29df2ce72cfef685f4ac9d6f3bb741e294
+    icon: view-source:https://raw.githubusercontent.com/sgaunet/helmchart-helper/main/ico/helm.ico
+    name: s3xplorer
+    type: application
+    urls:
+    - https://github.com/sgaunet/helm-s3xplorer/releases/download/s3xplorer-0.6.1/s3xplorer-0.6.1.tgz
+    version: 0.6.1
+  - apiVersion: v2
+    appVersion: 0.6.0
     created: "2025-09-30T18:36:47.513820653Z"
     description: A Helm chart for Kubernetes
     digest: 39bfcb5acc2d29e7b22098883b43af58549e9ceb936092086c568a7483fdfa29
@@ -100,4 +111,4 @@ entries:
     urls:
     - https://github.com/sgaunet/helm-s3xplorer/releases/download/s3xplorer-0.1.0/s3xplorer-0.1.0.tgz
     version: 0.1.0
-generated: "2025-09-30T18:36:47.513859114Z"
+generated: "2025-10-04T07:20:43.349675058Z"
