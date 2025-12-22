@@ -18,6 +18,10 @@ data:
       skip_bucket_validation: {{ .s3.skip_bucket_validation }}
     database:
       url: {{ .database.url | quote }}
+      max_open_conns: {{ .database.max_open_conns }}
+      max_idle_conns: {{ .database.max_idle_conns }}
+      conn_max_lifetime: {{ .database.conn_max_lifetime | quote }}
+      conn_max_idle_time: {{ .database.conn_max_idle_time | quote }}
     scan:
       enable_background_scan: {{ .scan.enable_background_scan }}
       cron_schedule: {{ .scan.cron_schedule | quote }}

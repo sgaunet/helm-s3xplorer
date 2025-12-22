@@ -75,6 +75,14 @@ configuration:
   database:
     # -- PostgreSQL connection URL
     url: "postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"
+    # -- Maximum concurrent database connections (default: 25)
+    max_open_conns: 25
+    # -- Idle connections to keep alive (default: 5)
+    max_idle_conns: 5
+    # -- Maximum connection lifetime (default: "5m")
+    conn_max_lifetime: "5m"
+    # -- Maximum idle time before closing (default: "1m")
+    conn_max_idle_time: "1m"
   
   # -- Scan configuration
   scan:

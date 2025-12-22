@@ -1,6 +1,6 @@
 # s3xplorer
 
-![Version: 0.8.0](https://img.shields.io/badge/Version-0.8.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.8.0](https://img.shields.io/badge/AppVersion-0.8.0-informational?style=flat-square)
+![Version: 0.9.0](https://img.shields.io/badge/Version-0.9.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.0](https://img.shields.io/badge/AppVersion-0.9.0-informational?style=flat-square)
 
 S3 bucket explorer with web interface, PostgreSQL storage, automated scanning, and Glacier restore capabilities
 
@@ -17,7 +17,11 @@ S3 bucket explorer with web interface, PostgreSQL storage, automated scanning, a
 | configuration.bucket_sync.enable | bool | `true` | enable bucket synchronization |
 | configuration.bucket_sync.max_retries | int | `3` | maximum retries for bucket accessibility checks |
 | configuration.bucket_sync.sync_threshold | string | `"24h"` | time threshold for marking buckets as inaccessible |
-| configuration.database | object | `{"url":"postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"}` | Database configuration |
+| configuration.database | object | `{"conn_max_idle_time":"1m","conn_max_lifetime":"5m","max_idle_conns":5,"max_open_conns":25,"url":"postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"}` | Database configuration |
+| configuration.database.conn_max_idle_time | string | `"1m"` | Maximum idle time before closing (default: "1m") |
+| configuration.database.conn_max_lifetime | string | `"5m"` | Maximum connection lifetime (default: "5m") |
+| configuration.database.max_idle_conns | int | `5` | Idle connections to keep alive (default: 5) |
+| configuration.database.max_open_conns | int | `25` | Maximum concurrent database connections (default: 25) |
 | configuration.database.url | string | `"postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"` | PostgreSQL connection URL |
 | configuration.log_level | string | `"info"` | log level (debug, info, warn, error) |
 | configuration.s3 | object | `{"access_key":"","api_key":"","bucket":"my-bucket","enable_glacier_restore":false,"endpoint":"","prefix":"","region":"eu-west-3","restore_days":1,"skip_bucket_validation":false,"sso_aws_profile":""}` | S3 configuration |
