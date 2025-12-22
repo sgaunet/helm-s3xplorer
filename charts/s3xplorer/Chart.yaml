@@ -3,7 +3,7 @@ name: s3xplorer
 description: S3 bucket explorer with web interface, PostgreSQL storage, automated scanning, and Glacier restore capabilities
 
 type: application
-version: 0.9.0
-appVersion: "0.9.0"
+version: 0.9.1
+appVersion: "0.9.1"
 
 icon: view-source:https://raw.githubusercontent.com/sgaunet/helmchart-helper/main/ico/helm.ico
