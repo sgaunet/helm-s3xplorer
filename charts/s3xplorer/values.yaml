@@ -70,6 +70,10 @@ configuration:
     enable_glacier_restore: false
     # -- skip bucket validation (HeadBucket operation)
     skip_bucket_validation: false
+    # -- enable file upload functionality
+    enable_upload: false
+    # -- enable file deletion functionality
+    enable_delete: false
   
   # -- Database configuration
   database:

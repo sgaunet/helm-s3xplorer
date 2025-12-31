@@ -1,6 +1,6 @@
 # s3xplorer
 
-![Version: 0.9.1](https://img.shields.io/badge/Version-0.9.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.9.1](https://img.shields.io/badge/AppVersion-0.9.1-informational?style=flat-square)
+![Version: 0.11.0](https://img.shields.io/badge/Version-0.11.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.11.0](https://img.shields.io/badge/AppVersion-0.11.0-informational?style=flat-square)
 
 S3 bucket explorer with web interface, PostgreSQL storage, automated scanning, and Glacier restore capabilities
 
@@ -24,11 +24,13 @@ S3 bucket explorer with web interface, PostgreSQL storage, automated scanning, a
 | configuration.database.max_open_conns | int | `25` | Maximum concurrent database connections (default: 25) |
 | configuration.database.url | string | `"postgres://postgres:postgres@localhost:5432/s3xplorer?sslmode=disable"` | PostgreSQL connection URL |
 | configuration.log_level | string | `"info"` | log level (debug, info, warn, error) |
-| configuration.s3 | object | `{"access_key":"","api_key":"","bucket":"my-bucket","enable_glacier_restore":false,"endpoint":"","prefix":"","region":"eu-west-3","restore_days":1,"skip_bucket_validation":false,"sso_aws_profile":""}` | S3 configuration |
+| configuration.s3 | object | `{"access_key":"","api_key":"","bucket":"my-bucket","enable_delete":false,"enable_glacier_restore":false,"enable_upload":false,"endpoint":"","prefix":"","region":"eu-west-3","restore_days":1,"skip_bucket_validation":false,"sso_aws_profile":""}` | S3 configuration |
 | configuration.s3.access_key | string | `""` | access key for the aws credentials |
 | configuration.s3.api_key | string | `""` | api key for the aws credentials |
 | configuration.s3.bucket | string | `"my-bucket"` | bucket name |
+| configuration.s3.enable_delete | bool | `false` | enable file deletion functionality |
 | configuration.s3.enable_glacier_restore | bool | `false` | enable glacier restore functionality |
+| configuration.s3.enable_upload | bool | `false` | enable file upload functionality |
 | configuration.s3.endpoint | string | `""` | s3 endpoint |
 | configuration.s3.prefix | string | `""` | set the prefix to restrict the access to a specific folder |
 | configuration.s3.region | string | `"eu-west-3"` | region of the s3 bucket |

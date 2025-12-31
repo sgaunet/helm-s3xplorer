@@ -16,6 +16,8 @@ data:
       restore_days: {{ .s3.restore_days }}
       enable_glacier_restore: {{ .s3.enable_glacier_restore }}
       skip_bucket_validation: {{ .s3.skip_bucket_validation }}
+      enable_upload: {{ .s3.enable_upload }}
+      enable_delete: {{ .s3.enable_delete }}
     database:
       url: {{ .database.url | quote }}
       max_open_conns: {{ .database.max_open_conns }}
