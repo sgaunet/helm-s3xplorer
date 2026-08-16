@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   s3xplorer:
   - apiVersion: v2
+    appVersion: 0.12.0
+    created: "2026-08-16T07:30:11.451605581Z"
+    description: S3 bucket explorer with web interface, PostgreSQL storage, automated
+      scanning, and Glacier restore capabilities
+    digest: 0c6e4ea8f86519e3105995bd5ab2ce2b5611c721177c6bda79a9d21e26131ab3
+    icon: view-source:https://raw.githubusercontent.com/sgaunet/helmchart-helper/main/ico/helm.ico
+    name: s3xplorer
+    type: application
+    urls:
+    - https://github.com/sgaunet/helm-s3xplorer/releases/download/s3xplorer-0.12.0/s3xplorer-0.12.0.tgz
+    version: 0.12.0
+  - apiVersion: v2
     appVersion: 0.11.0
     created: "2025-12-31T09:19:56.448909951Z"
     description: S3 bucket explorer with web interface, PostgreSQL storage, automated
@@ -170,4 +182,4 @@ entries:
     urls:
     - https://github.com/sgaunet/helm-s3xplorer/releases/download/s3xplorer-0.1.0/s3xplorer-0.1.0.tgz
     version: 0.1.0
-generated: "2025-12-31T09:19:56.44901926Z"
+generated: "2026-08-16T07:30:11.451710707Z"
